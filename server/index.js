@@ -13,10 +13,18 @@ app.use(bodyParser.urlencoded({ extended:true }));
 app.get('/api/get',(req,res) => {
     const sql = "SELECT * FROM posts";
     db.query(sql,(err,result) => {
-        console.log(result)
         res.send(result)
     })
 })
+
+app.get('/api/get/:id', (req,res) => {
+    const id = req.params.id
+    const sql = "SELECT * FROM posts where id = ?;"
+    db.query(sql,id,(err,result) => {
+        res.send(result)
+    })
+})
+
 app.post('/api/create', (req, res) => {
     const date = new Date().toISOString().slice(0, 10);
     const title = req.body.title;
