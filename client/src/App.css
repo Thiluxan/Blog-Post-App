@@ -74,4 +74,20 @@ textarea{
   padding:10px;
   width:100px;
   text-transform:uppercase;
+  border: 2px solid black;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.view-post{
+  margin-top: 30px;
+  margin-left:150px;
+  text-align: left;
+}
+.view-post p{
+  width:80%;
+  text-align:justify;
+}
+.pagination{
+  margin-top:25px;
+  margin-left:700px;
 }

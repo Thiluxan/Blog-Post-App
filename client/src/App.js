@@ -1,6 +1,7 @@
 import './App.css';
 import MainPage from './components/MainPage';
 import CreatePost from './components/CreatePost'
+import Post from './components/Post'
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Router>
           <Route exact path="/" render={props => <MainPage />} />
           <Route exact path="/create" render={props => <CreatePost />} />
+          <Route exact path="/post/:id" component={Post}/>
       </Router>
     </div>
   );

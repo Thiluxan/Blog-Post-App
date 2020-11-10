@@ -1,8 +1,20 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
+import PostsDisplay from './PostsDisplay'
+import Pagination from './Pagination'
 
 function MainPage() {
     const [postList, setPostList] = useState([])
+    const [currentPage,setCurrentPage] = useState(1)
+    const [postsPerPage] = useState(4)
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = postList.slice(indexOfFirstPost, indexOfLastPost);
+
+    const changePage = (number) => {
+        setCurrentPage(number);
+    }
 
     useEffect(() =>{
         axios.get('http://localhost:3001/api/get')
@@ -10,22 +22,12 @@ function MainPage() {
              setPostList(response.data)
          })
     },[])
+
+
     return (
-        <div className="main-page">
-            {
-                postList.map(post => {
-                    return (
-                        <div className="post-container">
-                            <h1>{post.title}</h1>
-                            <p>{post.description}</p>
-                            <span><i>Published By: </i><b>{post.publisher}</b></span><br/>
-                            <span><i>Published On: </i><b>{post.date}</b></span> <br/><br/>
-                            <button>view</button>
-                        </div>
-                    )
-                })
-            }
-            
+        <div>
+            <PostsDisplay postList={currentPosts}  />
+            <Pagination postsPerPage={postsPerPage} totalPosts={postList.length} Paginate={changePage} />
         </div>
     )
 }
