@@ -1,7 +1,7 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 
-function CreatePost() {
+function CreatePost(props) {
     const [title,setTitle] = useState('')
     const [publisher,setPublisher] = useState('')
     const[post,setPost] = useState('')
@@ -17,6 +17,18 @@ function CreatePost() {
         })
 
     }
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/login')
+        .then(response => {
+            if(response.data.loggedIn) {
+                
+            }
+            else{
+                window.location.replace('/');
+            }
+        })
+    },[])
 
     return (
         <div className="create-post">
