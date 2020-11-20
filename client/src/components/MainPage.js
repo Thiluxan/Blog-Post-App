@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 import PostsDisplay from './PostsDisplay'
 import Pagination from './Pagination'
+import Header from './Header'
 
 function MainPage(props) {
     const [postList, setPostList] = useState([])
@@ -18,32 +19,18 @@ function MainPage(props) {
     }
 
     useEffect(() =>{
-        axios.get('http://localhost:3001/login')
-        .then(response => {
-            console.log(response.data);
-            if(response.data.loggedIn) {
-                axios.get('http://localhost:3001/api/get')
+            axios.get('http://localhost:3001/api/get')
                 .then(res => {
                     setPostList(res.data)
                 })
-            }
-            else{
-                window.location.replace("/")
-            }
-        })
+            
+            
         
     },[])
 
-    const logout = () => {
-        axios.get('http://localhost:3001/logout')
-        .then((response) => {
-            console.log("Logged out")
-        })
-    }
-
-
     return (
         <div>
+            <Header />
             <PostsDisplay postList={currentPosts}  />
             <Pagination postsPerPage={postsPerPage} totalPosts={postList.length} Paginate={changePage} />
             <br/><br/>
