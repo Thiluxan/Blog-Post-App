@@ -13,7 +13,7 @@
   border-bottom: 5px solid orange;
 }
 .navbar .links {
-  font-size: 25px;
+  font-size: 15px;
   color: white;
 }
 .links a{
@@ -24,6 +24,12 @@
 .links a:hover{
   cursor: pointer;
   font-weight: bolder;
+  background-color:white;
+  color:orangered;
+  text-decoration:none;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 .create-post{
   margin-top: 45px;
@@ -58,12 +64,12 @@ textarea{
   flex-wrap:wrap;
 }
 .main-page{
-  margin-left:250px;
+  margin-left:20px;
 }
 .post-container {
-  margin-left: 25px;
+  margin-left: 85px;
   margin-top: 45px;
-  width: 450px;
+  width: 350px;
   border: 1px solid black;
   border-radius: 20px;
   padding: 20px;

@@ -16,6 +16,9 @@ function CreatePost(props) {
             content:post,
             description:description,
         })
+        .then(response => {
+            window.location.replace('/home')
+        })
 
     }
 

@@ -1,13 +1,23 @@
-import React from 'react'
+import React,{useRef,useState} from 'react'
 import axios from 'axios'
+import {useAuth} from '../contexts/AuthContext'
+import {Link, useHistory} from 'react-router-dom'
 
 function Header() {
 
-    const logout = () => {
-        axios.get('http://localhost:3001/logout')
-            .then((response) => {
-                console.log("Logged out")
-        })
+    const [error,setError] = useState('')
+    const {currentUser,logout} = useAuth()
+    const history = useHistory()
+
+    async function handleLogout(){
+        setError('')
+        try{
+            await logout()
+            history.push('/login')
+        }
+        catch(err) {
+            setError('Failed to log out')
+        }
     }
 
     return (
@@ -16,7 +26,8 @@ function Header() {
                 <div className="links">
                 <a href="/home">Main Page</a>
                 <a href="/create">Create Post</a>
-                <a href="/" onClick={logout} style={{marginLeft:"1050px"}}>Logout</a>
+                <a href="/profile">Profile</a>
+                <a href="/" onClick={handleLogout} style={{marginLeft:"650px"}}>Logout</a>
                 </div>
             </div>
         </div>
